@@ -1,11 +1,16 @@
-import React from 'react'
+import React from "react";
+import { Outlet } from "react-router-dom";
 
 const App = () => {
   return (
-    <h1 className="text-3xl font-bold underline">
-      Hello world!
-    </h1>
-  )
-}
+    <>
+      Navbar
+      <main className="min-h-screen max-w-screen-2xl mx-auto px-4 py-6 font-primary">
+        <Outlet />
+      </main>
+      Footer
+    </>
+  );
+};
 
-export default App
+export default App;
