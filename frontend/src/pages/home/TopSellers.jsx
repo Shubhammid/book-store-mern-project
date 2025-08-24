@@ -87,8 +87,6 @@ const TopSellers = () => {
                     ))
                 }
 
-
-
             </Swiper>
     </div>
   );
