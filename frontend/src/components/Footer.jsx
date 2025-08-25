@@ -64,9 +64,9 @@ const Footer = () => {
         </section>
       </div>
 
-      {/* Bottom Section */}
+      
       <div className="container mx-auto flex flex-col md:flex-row justify-between items-center mt-12 border-t border-gray-700 pt-6">
-        {/* Left - Privacy */}
+        
         <ul className="flex gap-6 text-sm mb-4 md:mb-0">
           <li>
             <a href="#privacy" className="hover:text-primary transition-colors">
