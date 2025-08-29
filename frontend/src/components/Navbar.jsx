@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import {
   HiMiniBars3CenterLeft,
   HiOutlineHeart,
@@ -10,6 +10,7 @@ import { HiOutlineUser } from "react-icons/hi";
 import avatarImg from "../assets/avatar.png";
 import { useState } from "react";
 import { useSelector } from "react-redux";
+import { useAuth } from "../context/AuthContext";
 
 const navigation = [
   { name: "Dashboard", href: "/user-dashboard" },
@@ -22,11 +23,22 @@ const Navbar = () => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const cartItems = useSelector((state) => state.cart.cartItems);
 
-  const currentUser = false;
+  const { currentUser, logout } = useAuth();
+  const navigate = useNavigate();
+
+  const handleLogOut = async () => {
+    try {
+      await logout(); 
+      navigate("/login");
+    } catch (error) {
+      console.error("Logout failed", error);
+    }
+  };
 
   return (
     <header className="fixed top-0 left-0 w-full z-50 bg-white/60 backdrop-blur-lg shadow-md">
       <nav className="max-w-screen-2xl mx-auto px-4 py-4 flex justify-between items-center">
+       
         <div className="flex items-center md:gap-16 gap-4">
           <Link to="/">
             <HiMiniBars3CenterLeft className="size-6 text-gray-700 hover:text-primary transition-colors duration-200" />
@@ -42,6 +54,7 @@ const Navbar = () => {
           </div>
         </div>
 
+       
         <div className="relative flex items-center md:space-x-4 space-x-3">
           <div className="relative">
             {currentUser ? (
@@ -53,7 +66,7 @@ const Navbar = () => {
                   <img
                     src={avatarImg}
                     alt="User Avatar"
-                    className={`size-8 rounded-full ring-2 ring-primary cursor-pointer hover:scale-105 transition-transform duration-200`}
+                    className="size-8 rounded-full ring-2 ring-primary cursor-pointer hover:scale-105 transition-transform duration-200"
                   />
                 </button>
                 {isDropdownOpen && (
@@ -72,6 +85,14 @@ const Navbar = () => {
                           </Link>
                         </li>
                       ))}
+                      <li>
+                        <button
+                          onClick={handleLogOut}
+                          className="block w-full text-left px-4 py-2 text-sm hover:bg-gray-100"
+                        >
+                          Logout
+                        </button>
+                      </li>
                     </ul>
                   </div>
                 )}
