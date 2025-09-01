@@ -26,7 +26,6 @@ const CheckoutPage = () => {
                 country: data.country,
                 state: data.state,
                 zipcode: data.zipcode
-        
             },
             phone: data.phone,
             productIds: cartItems.map(item => item?._id),
